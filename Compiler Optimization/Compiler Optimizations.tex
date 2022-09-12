@@ -17,12 +17,12 @@
 \maketitle
 
 \section*{Introduction}
-Compiler Optimization is a process where the compiler tries to maximize program efficiency by decreasing the run time of an application. To do so, the compiler creates transformations in the code by rearranging sections. There are multiple levels of optimizations starting with the lowest level of -O0 to the highest level of -O3. 
+Compiler Optimization is a process where the compiler tries to decrease the run time of an application by maximizing program efficiency. To do so, the compiler creates transformations in the code by rearranging sections. There are multiple levels of optimizations starting with the lowest level of -O0 to the highest level of -O3. 
 
 The first level -O0 ensures that the code is run the same way it is written. Starting from -O1, some optimization will occur if possible. The recommended optimization speed is -O2. At the highest -O3 optimization level, higher performance is not guaranteed. Higher performance is only achieved with code that utilizes loop and memory access transformations. The -O3 option is primarily used for programs that have loops that use numerous floating-point calculations and pull large data sets.
 
 \section*{Testing Compiler Optimization}
-To figure out the runtimes for each optimization level and each compiler we utilized the rotate.cxx file. Below are the commands we used to test the run times at four different optimization levels for the Intel and Gnu compilers.
+To figure out the runtimes for each optimization level and each compiler we tested the levels on the given rotate.cxx file. Below are the commands we used to test the run times at four different optimization levels for the Intel and Gnu compilers.
 
 \subsection*{Commands Executed}
 
@@ -55,6 +55,12 @@ login3.frontera(8)$ icc -O3 rotate.cxx && a.out
 \caption{Program Runtime Results for Compiler Optimization O0 through O3}
 \label{tab:table1}
 \end{table}
+
+The runtime clearly decreases as the optimization level increases. Some of the higher optimization levels output 0 usec because the program ran so fast that the runtime was not registered.  
+\\At level -O0, no optimization techniques are used. 
+\\At level -O1, the code is optimized for size by omitting optimizations that tend to increase object size - this is applicable in situations with large server / databases where memory paging due to large code size is an issue.
+\\At level -O2, the code is optimized to maximize speed with tools such as vectorization and intra-file interprocedural optimizations.
+\\At level -O3, the -O2 optimization techniques are used with more aggressive loop and memory-access optimizations.
 
 \begin{figure}[H]
 \centering
@@ -148,5 +154,12 @@ Runtime: 0 usec
 
 \end{enumerate}
 
+The most efficient compiler transformation was the third attempt when we calculated sin(alpha) and cos(alpha) once for the entire program. This decreased the runtime by a factor of 8. Our second attempt, calculating sin(alpha) and cos(alpha) once per call also helped the efficiency and decreased the runtime by a factor of 2. Passing the variables by reference had no significant decrease in runtime, and removing the unused calculations eliminated the runtime entirely because there was nothing to compute. 
+
+\newpage
+\section*{Sources}
+\begin{enumerate}
+\item Quick Reference Guide to Optimization Intel® C++ and Fortran Compilers v15 
+\end{enumerate}
 
 \end{document}
