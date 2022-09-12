@@ -48,7 +48,7 @@ login3.frontera(8)$ icc -O3 rotate.cxx && a.out
 \hline
 \textbf{Optimization Level} & \textbf{Intel Compiler Runtime} & \textbf{Gnu Compiler Runtime} \\ \hline
 0 & 280,530 usec & 427,784 usec \\ \hline
-1 & 259,247 usec & 255216 usec \\ \hline
+1 & 259,247 usec & 255,216 usec \\ \hline
 2 & 252,709 usec & 0 usec \\ \hline
 3 & 0 usec & 0 usec \\ \hline
 \end{tabular}
@@ -56,7 +56,7 @@ login3.frontera(8)$ icc -O3 rotate.cxx && a.out
 \label{tab:table1}
 \end{table}
 
-The runtime clearly decreases as the optimization level increases. Some of the higher optimization levels output 0 usec because the program ran so fast that the runtime was not registered.  
+The runtime decreases as the optimization level increases. Some of the higher optimization levels output 0 usec because the program ran so fast that the runtime was not registered.  
 \\At level -O0, no optimization techniques are used. 
 \\At level -O1, the code is optimized for size by omitting optimizations that tend to increase object size - this is applicable in situations with large server / databases where memory paging due to large code size is an issue.
 \\At level -O2, the code is optimized to maximize speed with tools such as vectorization and intra-file interprocedural optimizations.
